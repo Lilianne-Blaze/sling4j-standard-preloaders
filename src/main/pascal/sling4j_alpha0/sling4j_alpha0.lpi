@@ -25,6 +25,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
+            <OtherUnitFiles Value="..\lbcode_package;..\sling4j_package"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <Parsing>
@@ -60,6 +61,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
+            <OtherUnitFiles Value="..\lbcode_package;..\sling4j_package"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -90,6 +92,16 @@
         <Filename Value="sling4j_alpha0.lpr"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="..\sling4j_package\sling4j.interfaces.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Sling4j.Interfaces"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\lbcode_package\lbcode.miscutils.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="LBCode.MiscUtils"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -100,6 +112,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="..\lbcode_package;..\sling4j_package"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
   </CompilerOptions>

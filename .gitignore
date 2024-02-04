@@ -55,3 +55,4 @@ nbdist/
 **/backup/
 *.dbg
 
+/target/

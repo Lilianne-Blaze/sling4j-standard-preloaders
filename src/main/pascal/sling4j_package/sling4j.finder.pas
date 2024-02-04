@@ -9,17 +9,20 @@ uses
   Classes,
   SysUtils,
   Sling4j.Java.FilterSorters,
+  Sling4j.Interfaces,
   Sling4j.Java.Dirs;
 
 type
-  TSling4jFinder = class
+  TSling4jFinder = class(ISling4jFinder)
   private
+    OwnerField: ISling4jEngine;
     SearchDirsField: TStringList;
     FiltersField: TJavaDirFilterSorterList;
     JavaDirsFoundField: TJavaDirList;
   public
-    constructor Create();
+    constructor Create(const AOwner: ISling4jEngine);
     destructor Destroy(); override;
+    function GetOwner(): ISling4jEngine; virtual;
     procedure AddDir(const dir: string); virtual;
     procedure AddJavaHome(); virtual;
     procedure AddCommonVendors(); virtual;
@@ -36,14 +39,16 @@ type
 implementation
 
 uses
-  LBNet.Windows.Utils,
-  LBNet.Collections,
-  LBNet.SystemUtils;
+  LBCode.Windows.Utils,
+  LBCode.Collections,
+  LBCode.SystemUtils;
 
-constructor TSling4jFinder.Create();
+constructor TSling4jFinder.Create(const AOwner: ISling4jEngine);
 begin
   WriteLn('Entering TSling4jFinder.Create, ', GetMemBlockIdSize(Self));
   inherited Create();
+
+  OwnerField := AOwner;
 
   SearchDirsField := TStringList.Create();
   FiltersField := TJavaDirFilterSorterList.Create();
@@ -55,6 +60,8 @@ destructor TSling4jFinder.Destroy();
 begin
   WriteLn('Entering TSling4jFinder.Destroy');
 
+  OwnerField := nil;
+
   FreeAndNil(SearchDirsField);
   FiltersField.ClearAndFree();
   FreeAndNil(FiltersField);
@@ -62,6 +69,12 @@ begin
   FreeAndNil(JavaDirsFoundField);
 
   inherited Destroy();
+end;
+
+
+function TSling4jFinder.GetOwner(): ISling4jEngine;
+begin
+  Result := OwnerField;
 end;
 
 
